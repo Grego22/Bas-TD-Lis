@@ -19,11 +19,16 @@ app.engine('mustache', mustacheExpress())
 app.set('views', './views')
 //teach our app to use mustache engine for our template
 app.set('view engine', 'mustache')
+
 // this will attach the bodyParser to the pipeline and attach the
 // the data to the req as JSON
 app.use(bodyParser.json())
 
 app.use(expressValidator())
+
+app.get('/', (request, response)=> {
+response.render ('index')
+})
 
 
 app.use(bodyParser.urlencoded({extended:false}))
