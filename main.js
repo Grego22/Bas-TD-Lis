@@ -30,6 +30,30 @@ app.get('/', (request, response)=> {
 response.render ('index')
 })
 
+const = todos[]
+
+app.post("/", function (req, res) {
+	request
+		.checkBody('todo','You must add a todo list...PLEASE!')
+		.notempty()
+		todos.push(req.body.todo);
+  res.redirect('/');
+	const errors = req.validationErrors()
+  console.log(errors)
+  if (errors){
+    // render the form again with the errors
+    const data = {
+      errors: errors
+    }
+    res.render('index', data)
+  } else{
+    // render the thank you page
+      res.render('thankyou', {
+        fullName: req.body.fullName,
+        email: req.body.email
+      })
+  })
+
 
 app.use(bodyParser.urlencoded({extended:false}))
 //
