@@ -6,9 +6,7 @@ const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 
 //mark would use console.log data hear to make sure we have it!
-console.log(mustacheExpress)
-console.log(bodyParser)
-console.log(expressValidator)
+
 
 
 // //teach our app to use public for all public files
@@ -30,29 +28,31 @@ app.get('/', (request, response)=> {
 response.render ('index')
 })
 
-const = todos[]
+const todos = []
+console.log(todos);
 
-app.post("/", function (req, res) {
+app.post("/", function (request, response) {
 	request
 		.checkBody('todo','You must add a todo list...PLEASE!')
 		.notempty()
-		todos.push(req.body.todo);
+		todos.push(request.body.todos);
   res.redirect('/');
-	const errors = req.validationErrors()
+	const errors = request.validationErrors()
   console.log(errors)
-  if (errors){
-    // render the form again with the errors
-    const data = {
-      errors: errors
-    }
-    res.render('index', data)
-  } else{
-    // render the thank you page
-      res.render('thankyou', {
-        fullName: req.body.fullName,
-        email: req.body.email
-      })
-  })
+  // if (errors){
+  //   // render the form again with the errors
+  //   const data = {
+  //     errors: errors
+  //   }
+  //   response.render('index', data)
+  // } else{
+  //   // render the thank you page
+  //     response.render('thankyou', {
+  //       fullName: reqquest.body.fullName,
+  //       email: reqquest.body.email
+		//	}
+		//})
+			})
 
 
 app.use(bodyParser.urlencoded({extended:false}))
