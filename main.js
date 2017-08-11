@@ -5,8 +5,6 @@ const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
 
-//mark would use console.log data hear to make sure we have it!
-
 
 
 // //teach our app to use public for all public files
@@ -21,59 +19,41 @@ app.set('view engine', 'mustache')
 // this will attach the bodyParser to the pipeline and attach the
 // the data to the req as JSON
 app.use(bodyParser.json())
-
+app.use(bodyParser.urlencoded({extended:false}))
 app.use(expressValidator())
 
-app.get('/', (request, response)=> {
-response.render ('index')
+const taskList = [
+  'Walk the dog',
+  'Feed the Fish',
+  'Water the plants',
+  'Clean the litterbox',
+]
+
+const completedTasks =[
+  'read a book',
+  'study lecture notes',
+]
+
+//when the user asks for /, I say hello world
+app.get('/', (request, response) =>{
+
+  response.render('index', {todoListForTheBrowser: taskList, completedTasksForTheBrowser: completedTasks})
+  // this is confusing, have to revisit
 })
 
-const todos = []
-console.log(todos);
+app.post('/addTask', (request, response)=>{
+  //algorithim for what do to here:
+  //get the description of the new todo item
+  //
+  const newTaskList = request.body.description
+  taskList.push(newTaskList)
+  response.redirect('/')
+})
 
-app.post("/", function (request, response) {
-	request
-		.checkBody('todo','You must add a todo list...PLEASE!')
-		.notempty()
-		todos.push(request.body.todos);
-  res.redirect('/');
-	const errors = request.validationErrors()
-  console.log(errors)
-  // if (errors){
-  //   // render the form again with the errors
-  //   const data = {
-  //     errors: errors
-  //   }
-  //   response.render('index', data)
-  // } else{
-  //   // render the thank you page
-  //     response.render('thankyou', {
-  //       fullName: reqquest.body.fullName,
-  //       email: reqquest.body.email
-		//	}
-		//})
-			})
-
-
-app.use(bodyParser.urlencoded({extended:false}))
-//
-// app.get('/', (request, response) => {
-// 	//sending content to the browser from javascript
-// 	response.render('index', data)
-// })
-// app.get('/info/:id', (request, response) => {
-// 	const requestId = parseInt(request.params.id)
-//
-// 	const foundUser = data.users.find(user => user.id === requestId)
-//
-// 	response.render('info', foundUser)
-// })
-// /*
-// app.get('users/:id', (request, response) => {
-// 	response.render('users', data)
-//   const requestId = request.params.id
-// })
-// */
-app.listen(7777, function() {
-	console.log('Looking good Billy Ray!!!')
+app.post('/markComplete', (request, response)=>{
+  console.log(request.body)
+  response.send('marking something complete')
+})
+app.listen(2222, ()=> {
+    console.log('Rolling dice 2222')
 })
