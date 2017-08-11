@@ -12,13 +12,14 @@
     </form>
     <ul>
       {{#todoListForTheBrowser}}
+      <li>
         <form class="" action="markComplete" method="post">
             <button type="submit" name="descriptionOfTheTaskWeAreCompleting" value="{{.}}">Mark Complete</button>
             {{.}}
-      <li>
         </form>
       </li>
       {{/todoListForTheBrowser}}
+    </ul>
       <!-- <li>Walk the dog</li>
         <button type="button" name="button">Mark Complete</button>
       <li>Feed the Fish</li>
@@ -28,7 +29,6 @@
       <li>Clean the litterbox</li>
         <button type="button" name="button">Mark Complete</button> -->
         <!-- The above code can be factored out like scaffolding  -->
-    </ul>
     <h2>Completed Tasks</h2>
     <ul>
       {{#completedTasksForTheBrowser}}

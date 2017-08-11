@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-
 const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
 const expressValidator = require('express-validator')
@@ -43,16 +42,18 @@ app.get('/', (request, response) =>{
 
 app.post('/addTask', (request, response)=>{
   //algorithim for what do to here:
-  //get the description of the new todo item
-  //
+
   const newTaskList = request.body.description
   taskList.push(newTaskList)
   response.redirect('/')
 })
 
 app.post('/markComplete', (request, response)=>{
-  console.log(request.body)
-  response.send('marking something complete')
+    const descriptionOfTheTaskWeAreCompleting = request.body.descriptionOfTheTaskWeAreCompleting
+    completedTasks.push(descriptionOfTheTaskWeAreCompleting)
+
+    const indexOfItem = taskList.indexOf(descriptionOfTheTaskWeAreCompleting)
+    taskList.splice(indexOfItem, 1)
 })
 app.listen(2222, ()=> {
     console.log('Rolling dice 2222')
