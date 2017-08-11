@@ -54,6 +54,8 @@ app.post('/markComplete', (request, response)=>{
 
     const indexOfItem = taskList.indexOf(descriptionOfTheTaskWeAreCompleting)
     taskList.splice(indexOfItem, 1)
+    response.redirect("/")
+
 })
 app.listen(2222, ()=> {
     console.log('Rolling dice 2222')
