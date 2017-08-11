@@ -23,15 +23,15 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(expressValidator())
 
 const taskList = [
-  'Walk the dog',
-  'Feed the Fish',
-  'Water the plants',
-  'Clean the litterbox',
+  'Pick up groceries from Publix',
+  'Pay the electric bill',
+  'Facetime the family',
+  'Devote 1 hour to job search',
 ]
 
 const completedTasks =[
-  'read a book',
-  'study lecture notes',
+  'read a chapter in your book',
+  'study lecture notes and code written today',
 ]
 
 //when the user asks for /, I say hello world
